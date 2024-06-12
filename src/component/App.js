@@ -78,8 +78,14 @@ function App() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const data = await axios.get("/data.json");
-        dispatch({ type: "dataReceived", payload: data.data });
+        const response = await axios.get("/questions.json");
+        const questionsData = response.data.questions;
+        console.log(questionsData);
+        if (Array.isArray(questionsData)) {
+          dispatch({ type: "dataReceived", payload: questionsData });
+        } else {
+          throw new Error("Invalid data format");
+        }
       } catch (error) {
         dispatch({ type: "dataFailed" });
       }
