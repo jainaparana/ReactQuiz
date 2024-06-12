@@ -78,7 +78,7 @@ function App() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const data = await axios.get("http://localhost:3000/questions");
+        const data = await axios.get("/data.json");
         dispatch({ type: "dataReceived", payload: data.data });
       } catch (error) {
         dispatch({ type: "dataFailed" });
